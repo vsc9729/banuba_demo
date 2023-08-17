@@ -40,7 +40,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 // Set Banuba license token for Video Editor SDK
-  static const String LICENSE_TOKEN = SET LICENSE TOKEN
+  static const String LICENSE_TOKEN =
+      "ql52476Lb1wAXIBJIO/4aDRKfl6KoEI4M7W1GH3HmBnIrkvZ5UFkfyXBArfdDPJ+ruILLhDjOrIbQji4RQLoFqZ6zIvTZOOVAcdrM/qGgzdNiv1jLHq12mexlUOOm7mxDBeuccYFsN5AggiYDzhEQAD42AxMTvFOvMP+3tmO8h9yOzUbFjK4AlOFL0jWE703NrxoOfEs69OIKt26gSvONA56L1D8Ee/sWUKHyHzS9hHsQK9u2dz4OJVWtoxZp2Pp2Hs/r+Id2/7WwqUx4N3+g75l5B1UwBsQv73urcNXlx4AeW+3p5opSq9L4TGg0+ZrRBvzffK5uUkZyaDTNmyca7Bxn4Xq9RAcNUtdijPckDB9Z1kGxCTsnEtYif1xEk0tEfAfowi5yzbo7N2XajwXILQu8/PoWp3nRxZ4o59cfcl41AUXiUae07/ufUxnGtPJKFbArbVAGuHmMpNm0Q8oxYn3skld5smlyGtEI+M88Eq55ldrV3XreiUyyuUMtVMXCHYJAYd371r/WqrZ3zrEJuHFXR9pLUVBPpdJ";
 
   static const channelName = 'startActivity/VideoEditorChannel';
 
@@ -63,7 +64,8 @@ class _MyHomePageState extends State<MyHomePage> {
       'License is revoked or expired. Please contact Banuba https://www.banuba.com/faq/kb-tickets/new';
 
   static const argExportedVideoFile = 'exportedVideoFilePath';
-  static const argExportedVideoCoverPreviewPath = 'exportedVideoCoverPreviewPath';
+  static const argExportedVideoCoverPreviewPath =
+      'exportedVideoCoverPreviewPath';
 
   static const platform = MethodChannel(channelName);
 
@@ -94,10 +96,12 @@ class _MyHomePageState extends State<MyHomePage> {
       final exportedVideoFilePath = result[argExportedVideoFile];
 
       // Use video cover preview to meet your requirements
-      final exportedVideoCoverPreviewPath = result[argExportedVideoCoverPreviewPath];
+      final exportedVideoCoverPreviewPath =
+          result[argExportedVideoCoverPreviewPath];
 
       _showConfirmation(context, "Play exported video file?", () {
-        platform.invokeMethod(methodDemoPlayExportedVideo, exportedVideoFilePath);
+        platform.invokeMethod(
+            methodDemoPlayExportedVideo, exportedVideoFilePath);
       });
     }
   }
@@ -111,10 +115,12 @@ class _MyHomePageState extends State<MyHomePage> {
       final XFile? file = await _picker.pickVideo(source: ImageSource.gallery);
 
       if (file == null) {
-        debugPrint('Cannot open video editor with PIP - video was not selected!');
+        debugPrint(
+            'Cannot open video editor with PIP - video was not selected!');
       } else {
         debugPrint('Open video editor in pip with video = ${file.path}');
-        final result = await platform.invokeMethod(methodStartVideoEditorPIP, file.path);
+        final result =
+            await platform.invokeMethod(methodStartVideoEditorPIP, file.path);
 
         _handleExportResult(result);
       }
@@ -132,10 +138,12 @@ class _MyHomePageState extends State<MyHomePage> {
       final XFile? file = await _picker.pickVideo(source: ImageSource.gallery);
 
       if (file == null) {
-        debugPrint('Cannot open video editor with Trimmer - video was not selected!');
+        debugPrint(
+            'Cannot open video editor with Trimmer - video was not selected!');
       } else {
         debugPrint('Open video editor in trimmer with video = ${file.path}');
-        final result = await platform.invokeMethod(methodStartVideoEditorTrimmer, file.path);
+        final result = await platform.invokeMethod(
+            methodStartVideoEditorTrimmer, file.path);
 
         _handleExportResult(result);
       }

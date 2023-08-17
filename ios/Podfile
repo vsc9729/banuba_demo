@@ -33,25 +33,27 @@ target 'Runner' do
   use_frameworks!
   use_modular_headers!
 
-  sdk_version = '1.28.0'
+  banuba_sdk_version = '1.29.1'
 
-  pod 'BanubaARCloudSDK', sdk_version #optional
-  pod 'BanubaVideoEditorSDK', sdk_version
-  pod 'BanubaAudioBrowserSDK', sdk_version #optional
-  pod 'BanubaEffectPlayer', sdk_version #optional
-  pod 'BanubaSDK', sdk_version #optional
-  pod 'BanubaSDKSimple', sdk_version
-  pod 'BanubaSDKServicing', sdk_version
-  pod 'VideoEditor', sdk_version
-  pod 'BanubaUtilities', sdk_version
-  pod 'BanubaVideoEditorGallerySDK', sdk_version #optional
-  pod 'BanubaLicenseServicingSDK', sdk_version
+  pod 'BanubaARCloudSDK', banuba_sdk_version #optional
+  pod 'BanubaVideoEditorSDK', banuba_sdk_version
+  pod 'BanubaAudioBrowserSDK', banuba_sdk_version #optional
+  pod 'BanubaSDKSimple', banuba_sdk_version
+  pod 'BanubaEffectPlayer', banuba_sdk_version
+  pod 'BanubaSDK', banuba_sdk_version
+  pod 'BanubaSDKServicing', banuba_sdk_version
+  pod 'VideoEditor', banuba_sdk_version
+  pod 'BanubaUtilities', banuba_sdk_version
+  pod 'BanubaVideoEditorGallerySDK', banuba_sdk_version #optional
+  pod 'BanubaLicenseServicingSDK', banuba_sdk_version
 
-  pod 'BNBLicenseUtils', sdk_version
-
-  pod 'VEExportSDK', sdk_version
-  pod 'VEEffectsSDK', sdk_version
-  pod 'VEPlaybackSDK', sdk_version
+  pod 'BNBLicenseUtils', banuba_sdk_version
+  
+  pod 'VEExportSDK', banuba_sdk_version
+  pod 'VEEffectsSDK', banuba_sdk_version
+  pod 'VEPlaybackSDK', banuba_sdk_version
+  
+  pod "BSImagePicker"
 
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
 end
