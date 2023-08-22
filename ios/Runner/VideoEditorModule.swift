@@ -91,10 +91,11 @@ class VideoEditorModule: VideoEditor {
        
         config.isHandfreeEnabled = true
         config.handsfreeConfiguration = updateHandsfreeConfiguration(config.handsfreeConfiguration)
-//         config.trimVideosConfiguration = updateEditorConfiguration(config.trimVideosConfiguration)
         // Gallery
         config.combinedGalleryConfiguration = updateCombinedGalleryConfiguration(config.combinedGalleryConfiguration)
-      
+         //Albums Configuration
+         config.albumsConfiguration = updateAlbumsConfiguration(config.albumsConfiguration)
+         //Progress Bar Configuration
         config.progressViewConfiguration = updateProgressViewConfiguration(config.progressViewConfiguration)
         
         // Cover image
@@ -102,30 +103,120 @@ class VideoEditorModule: VideoEditor {
         
         // Music editor
         config.musicEditorConfiguration = updateMusicEditorConfigurtion(config.musicEditorConfiguration)
-        
         // Alert popups
         config.alertViewConfiguration = updateAlertViewConfiguration(config.alertViewConfiguration)
-        
+         // Video Trimming
+                config.trimVideoConfiguration = updateTrimVideoConfiguration(config.trimVideoConfiguration)
+                config.trimVideosConfiguration = updateTrimVideosConfiguration(config.trimVideosConfiguration)
+                config.aspectsConfiguration = updateAspectsConfiguration(config.aspectsConfiguration)
         // ???
         config.filterConfiguration = updateFilterConfiguration(config.filterConfiguration)
-       
+         config.gifPickerConfiguration = updateGifPickerConfiguration(config.gifPickerConfiguration)
+         config.musicEditorConfiguration = updateMusicEditorConfigurtion(config.musicEditorConfiguration)
+         config.textEditorConfiguration = updateTextEditorConfiguration(config.textEditorConfiguration)
+        
         // ???
         config.fullScreenActivityConfiguration = updateFullScreenActivityConfiguration(config.fullScreenActivityConfiguration)
-        
+         config.overlayEditorConfiguration = updateOverlayEditorConfiguraiton(config.overlayEditorConfiguration);
         return config
     }
-    
+    private func updateTrimVideosConfiguration(_ configuration: TrimVideosConfiguration) -> TrimVideosConfiguration {
+            var updatedConfiguration = configuration
+            
+           
+            
+            updatedConfiguration.editVideoItemTitleConfiguration = TextConfiguration(
+                font: .systemFont(ofSize: 11.0),
+                color: .white
+            )
+            
+            
+            
+            
+            
+            updatedConfiguration.addGalleryVideoButtonBackgroundConfiguration = BackgroundConfiguration(
+                cornerRadius: 4.0,
+                color: UIColor.clear
+            )
+            
+            updatedConfiguration.trimTimelineConfiguration.trimContentCornerRadius = .zero
+            updatedConfiguration.trimTimelineConfiguration.draggerConfiguration.backgroundConfiguraiton.cornerRadius = 8.0
+       
+//            updatedConfiguration.trimTimelineConfiguration.controlsColor = UIColor(
+//                red: 250, green: 62, blue: 118, alpha: 1
+//            )
+        updatedConfiguration.backgroundConfiguration.color = .black
+        updatedConfiguration.timeLabelsConfiguration.color = .black
+        updatedConfiguration.isGalleryButtonHidden = true
+        updatedConfiguration.videoPartsBackgroundConfiguration.color = .white
+        updatedConfiguration.videoPartConfiguration.borderColor = Self.purple
+        updatedConfiguration.trimTimelineConfiguration.cursorColor = Self.purple
+        updatedConfiguration.editVideoItemTitleConfiguration.color = Self.purple
+        updatedConfiguration.trimTimelineConfiguration.draggerConfiguration.backgroundConfiguraiton.color = Self.purple
+        updatedConfiguration.trimTimelineConfiguration.draggerConfiguration.draggerLineBackgroundConfiguraion.color = .white
+        updatedConfiguration.reorderingVideoToolTipLabelConfiguration.color = .black
+            updatedConfiguration.backgroundConfiguration.cornerRadius = .zero
+            updatedConfiguration.screenNameConfiguration.style = nil
+            
+            updatedConfiguration.videoResolutionConfiguration = VideoResolutionConfiguration(
+                default: .hd1920x1080,
+                resolutions: [
+                    .iPhone5s: .hd1280x720,
+                    .iPhone6: .default854x480,
+                    .iPhone6s: .hd1280x720,
+                    .iPhone6Plus: .default854x480,
+                    .iPhone6sPlus: .hd1280x720,
+                    .iPhoneSE: .hd1280x720,
+                ],
+                thumbnailHeights: [
+                    .iPhone5s: 200.0,
+                    .iPhone6: 80.0,
+                    .iPhone6s: 200.0,
+                    .iPhone6Plus: 80.0,
+                    .iPhone6sPlus: 200.0,
+                    .iPhoneSE: 200.0,
+                ],
+                defaultThumbnailHeight: 400.0
+            )
+            
+            return updatedConfiguration
+        }
+        
+        private func updateTrimVideoConfiguration(_ configuration: TrimVideoConfiguration) -> TrimVideoConfiguration {
+            var updatedConfiguration = configuration
+            updatedConfiguration.screenNameConfiguration.style?.color = Self.purple
+//            updatedConfiguration.screenNameConfiguration.style?.text
+            updatedConfiguration.backgroundConfiguration.color = .white
+            updatedConfiguration.timeLabelsConfiguration.color = .black
+            updatedConfiguration.backgroundConfiguration.cornerRadius = .zero
+            updatedConfiguration.screenNameConfiguration.style = nil
+            updatedConfiguration.trimTimeLineConfiguration.cursorColor = Self.purple
+            updatedConfiguration.trimTimeLineConfiguration.controlsColor = Self.purple
+            updatedConfiguration.trimTimeLineConfiguration.draggerConfiguration.backgroundConfiguraiton.color = Self.purple
+            updatedConfiguration.trimTimeLineConfiguration.draggerConfiguration.draggerLineBackgroundConfiguraion.color = .white
+            
+//            updatedConfiguration.trimmerPanelBackgroundColor = Self.purple
+            return updatedConfiguration
+        }
+        
+        func updateAspectsConfiguration(_ configuration: EffectsListConfiguration) -> EffectsListConfiguration {
+            var updatedConfiguration = configuration
+       
+            
+            return updatedConfiguration
+        }
      func updateProgressViewConfiguration(_ configuration: ProgressViewConfiguration) -> ProgressViewConfiguration {
         configuration.progressBarColor = #colorLiteral(red: 0.56, green: 0.40, blue: 0.67, alpha: 1)
         configuration.progressBarHeight = 2.0
         configuration.progressBarCornerRadius = 1.0
-        
+         configuration.backgroundConfiguration.color = UIColor.white
+         
         configuration.cancelButtonBorderConfiguration.borderColor = #colorLiteral(red: 0.56, green: 0.40, blue: 0.67, alpha: 1)
-        configuration.cancelButtonTextConfiguration.style.color = #colorLiteral(red: 0.56, green: 0.40, blue: 0.67, alpha: 1)
+         configuration.cancelButtonBackgroundConfiguration.color = Self.purple
+         configuration.cancelButtonTextConfiguration.style.color = .white
         
-        configuration.messageConfiguration.color = #colorLiteral(red: 0.56, green: 0.40, blue: 0.67, alpha: 1)
-        configuration.tooltipMessageConfiguration.color = #colorLiteral(red: 0.56, green: 0.40, blue: 0.67, alpha: 1)
-        
+         configuration.messageConfiguration.color = .black
+        configuration.tooltipMessageConfiguration.color = UIColor(red: 0.54, green: 0.54, blue: 0.54, alpha: 1.00)
         return configuration
     }
     
@@ -137,110 +228,18 @@ class VideoEditorModule: VideoEditor {
     
     private func updateMainOverlayViewConfiguration(_ configuration: MainOverlayViewControllerConfig) -> MainOverlayViewControllerConfig {
         var updatedConfiguration = configuration
-        
-        updatedConfiguration.addButtons = [
-            OverlayAddButtonConfig(
-                type: .text,
-                title: "Text",
-                titleColor: .white,
-                font: UIFont.systemFont(ofSize: 14.0),
-                imageName: "ic_AddText"
-            ),
-            
-            OverlayAddButtonConfig(
-                type: .sticker,
-                title: "Sticker",
-                titleColor: .white,
-                font: UIFont.systemFont(ofSize: 14.0),
-                imageName: "ic_AddSticker"
-            ),
-            
-            OverlayAddButtonConfig(
-                type: .blur,
-                title: "Circle",
-                titleColor: .white,
-                font: UIFont.systemFont(ofSize: 14.0),
-                imageName: "circle_blur",
-                drawableFigure: .circle
-            ),
-            
-            OverlayAddButtonConfig(
-                type: .blur,
-                title: "Square",
-                titleColor: .white,
-                font: UIFont.systemFont(ofSize: 14.0),
-                imageName: "square_blur",
-                drawableFigure: .square
-            )
-        ]
-        
-        updatedConfiguration.editButtonsHeight = 50.0
-        updatedConfiguration.editButtonsInteritemSpacing = 0.0
-        
-        updatedConfiguration.controlButtons = [
-            OverlayControlButtonConfig(
-                type: .reset,
-                imageName: "ic_restart",
-                selectedImageName: nil
-            ),
-            OverlayControlButtonConfig(
-                type: .play,
-                imageName: "ic_editor_play",
-                selectedImageName: "ic_pause"
-            ),
-            OverlayControlButtonConfig(
-                type: .done,
-                imageName: "ic_done",
-                selectedImageName: nil
-            )
-        ]
-        
-        updatedConfiguration.editCompositionButtons = [
-            OverlayEditButtonConfig(
-                type: .edit,
-                title: "Edit",
-                titleColor: .white,
-                font: UIFont.systemFont(ofSize: 14.0),
-                imageName: "ic_edit",
-                selectedImageName: nil
-            ),
-            
-            OverlayEditButtonConfig(
-                type: .delete,
-                title: "Delete",
-                titleColor: .white,
-                font: UIFont.systemFont(ofSize: 14.0),
-                imageName: "ic_trash",
-                selectedImageName: nil
-            )
-        ]
-        
-        updatedConfiguration.playerControlsHeight = 50.0
+//        updatedConfiguration.addButtons = updatedConfiguration.addButtons.reversed()
+        updatedConfiguration.cursorColor = Self.purple
+        updatedConfiguration.additionalLabelColors = Self.purple
         updatedConfiguration.mainLabelColors = #colorLiteral(red: 0.56, green: 0.40, blue: 0.67, alpha: 1)
-        updatedConfiguration.additionalLabelColors = UIColor.white
-        updatedConfiguration.additionalLabelFonts = UIFont.systemFont(ofSize: 12.0)
-        updatedConfiguration.cursorColor = UIColor.white
-        updatedConfiguration.audioWaveConfiguration.borderColor = UIColor.white
-        updatedConfiguration.resizeImageName = "ic_cut_arrow"
-        updatedConfiguration.draggersHorizontalInset = .zero
-        updatedConfiguration.draggersHeight = 25.0
-        updatedConfiguration.backgroundConfiguration.cornerRadius = .zero
-        updatedConfiguration.playerControlsBackgroundConfiguration.cornerRadius = .zero
-        updatedConfiguration.defaultLinesCount = 2
-        updatedConfiguration.timelineCornerRadius = .zero
-        updatedConfiguration.draggerBackgroundColor = UIColor.white
-        updatedConfiguration.timeLabelsOffset = .zero
-        updatedConfiguration.itemsTopOffset = .zero
-        updatedConfiguration.draggerCornerRadius = nil
-        updatedConfiguration.draggersImageHeight = 25.0
-        updatedConfiguration.draggersWidth = nil
-        
+        updatedConfiguration.draggerBackgroundColor = Self.purple
+        updatedConfiguration.additionalLabelColors = .black
+        updatedConfiguration.backgroundConfiguration.color = .white
         return updatedConfiguration
     }
     
     private func updateTextEditorConfiguration(_ configuration: TextEditorConfiguration) -> TextEditorConfiguration {
         var updatedConfiguration = configuration
-        
         updatedConfiguration.doneButton.textConfiguration?.color = #colorLiteral(red: 0.56, green: 0.40, blue: 0.67, alpha: 1)
         updatedConfiguration.fontItemConfiguration = TextEditFontItemConfiguration(
             titleColor: #colorLiteral(red: 0.56, green: 0.40, blue: 0.67, alpha: 1),
@@ -250,22 +249,21 @@ class VideoEditorModule: VideoEditor {
             isBackgroundViewHidden: true
         )
         
-        updatedConfiguration.textBackgroundButton = ImageButtonConfiguration(
-            imageConfiguration: ImageConfiguration(imageName: "ic_text_without_background"),
-            selectedImageConfiguration: ImageConfiguration(imageName: "ic_text_with_background")
-        )
+//        updatedConfiguration.textBackgroundButton = ImageButtonConfiguration(
+//            imageConfiguration: ImageConfiguration(imageName: "ic_text_without_background"),
+//            selectedImageConfiguration: ImageConfiguration(imageName: "ic_text_with_background")
+//        )
+//        updatedConfiguration.alignmentImages = [
+//            .left: ImageButtonConfiguration(imageConfiguration: ImageConfiguration(imageName: "ic_text_align_left")),
+//            .center: ImageButtonConfiguration(imageConfiguration: ImageConfiguration(imageName: "ic_text_align_center")),
+//            .right: ImageButtonConfiguration(imageConfiguration: ImageConfiguration(imageName: "ic_text_align_right"))
+//        ]
         
-        updatedConfiguration.alignmentImages = [
-            .left: ImageButtonConfiguration(imageConfiguration: ImageConfiguration(imageName: "ic_text_align_left")),
-            .center: ImageButtonConfiguration(imageConfiguration: ImageConfiguration(imageName: "ic_text_align_center")),
-            .right: ImageButtonConfiguration(imageConfiguration: ImageConfiguration(imageName: "ic_text_align_right"))
-        ]
-        
-        updatedConfiguration.palette = [
-            VideoTextColorPair(colors:( .clear, .white, .white, .darkGray)),
-            VideoTextColorPair(colors:( .clear, .yellow, .yellow, .white)),
-            VideoTextColorPair(colors:( .clear, .gray, .gray, .white))
-        ]
+//        updatedConfiguration.palette = [
+//            VideoTextColorPair(colors:( .clear, .white, .white, .darkGray)),
+//            VideoTextColorPair(colors:( .clear, .yellow, .yellow, .white)),
+//            VideoTextColorPair(colors:( .clear, .gray, .gray, .white))
+//        ]
         
         updatedConfiguration.fonts = [
             VideoTextFont(
@@ -303,7 +301,7 @@ class VideoEditorModule: VideoEditor {
             backgroundColor: .white,
             isBackgroundViewHidden: false
         )
-        
+        updatedConfiguration.cursorColor = .white
         return updatedConfiguration
     }
     
@@ -320,27 +318,26 @@ class VideoEditorModule: VideoEditor {
     
     private func updateFilterConfiguration(_ configuration: FilterConfiguration) -> FilterConfiguration {
         var updatedConfiguration = configuration
-        
+        updatedConfiguration.backgroundConfiguration.color = UIColor.white
         updatedConfiguration.resetButton.backgroundColor = Self.purple
         updatedConfiguration.resetButton.cornerRadius = 6.0
         updatedConfiguration.resetButton.textConfiguration?.color = .white
         updatedConfiguration.toolTipLabel.color = .white
-        updatedConfiguration.cursorButton = ImageButtonConfiguration(imageConfiguration: ImageConfiguration(imageName: "ic_cursor"))
+//        updatedConfiguration.cursorButton = ImageButtonConfiguration(imageConfiguration: ImageConfiguration(imageName: "ic_cursor"))
         
         updatedConfiguration.effectItemConfiguration.cornerRadius = 6.0
         
-        updatedConfiguration.controlButtons = [
-            FilterControlButtonConfig(type: .cancel, imageName: "ic_close", selectedImageName: nil),
-            FilterControlButtonConfig(type: .play, imageName: "ic_editor_play", selectedImageName: "ic_pause"),
-            FilterControlButtonConfig(type: .done, imageName: "ic_done", selectedImageName: nil),
-        ]
-        
+//        updatedConfiguration.controlButtons = [
+//            FilterControlButtonConfig(type: .cancel, imageName: "ic_close", selectedImageName: nil),
+//            FilterControlButtonConfig(type: .play, imageName: "ic_editor_play", selectedImageName: "ic_pause"),
+//            FilterControlButtonConfig(type: .done, imageName: "ic_done", selectedImageName: nil),
+//        ]
+//
         return updatedConfiguration
     }
     
     private func updateFullScreenActivityConfiguration(_ configuration: FullScreenActivityConfiguration) -> FullScreenActivityConfiguration {
         var updatedConfiguration = configuration
-        
         updatedConfiguration.activityIndicator = SmallActivityIndicatorConfiguration(
             gradientType: .color(
                 SmallActivityIndicatorConfiguration.GradientColorConfiguration(
@@ -355,24 +352,22 @@ class VideoEditorModule: VideoEditor {
     
     private func updateVideCoverSelectionConfiguration(_ configuration: VideoCoverSelectionConfiguration) -> VideoCoverSelectionConfiguration {
         var updatedConfiguration = configuration
-        
+        updatedConfiguration.deleteImageButtonImageConfiguration.background.color = .white
         updatedConfiguration.cancelButton.backgroundColor = .white
-        updatedConfiguration.cancelButton.textConfiguration?.color = UIColor(
-            red: 6, green: 188, blue: 193, alpha: 1
-        )
+        updatedConfiguration.cancelButton.textConfiguration?.color = Self.purple
         updatedConfiguration.doneButton.backgroundColor = .white
-        updatedConfiguration.doneButton.textConfiguration?.color = UIColor(
-            red: 6, green: 188, blue: 193, alpha: 1
-        )
-        updatedConfiguration.titleLabel?.text = "Title cover"
-        updatedConfiguration.toolTipLabel.text = "Tool tip tabel"
+        updatedConfiguration.doneButton.textConfiguration?.color = Self.purple
+        updatedConfiguration.titleLabel?.text = "Select a thumbnail"
+        updatedConfiguration.titleLabel?.color = Self.purple
+//        updatedConfiguration.toolTipLabel.text = "Tool tip tabel"
         updatedConfiguration.selectGalleryImageButton.titlePosition = .left
         updatedConfiguration.deleteImageButtonImageConfiguration.titlePosition = .top
-        updatedConfiguration.backgroundConfiguration.color = UIColor.black
-        updatedConfiguration.previewBackgroundConfiguration.color = .clear
-        updatedConfiguration.thumbnailsCursorConfiguration.imageConfiguration = BanubaVideoEditorSDK.ImageConfiguration(imageName: "thumb")
+        updatedConfiguration.backgroundConfiguration.color = UIColor.white
+
+//        updatedConfiguration.thumbnailsCursorConfiguration.imageConfiguration = BanubaVideoEditorSDK.ImageConfiguration(imageName: "thumb")
         updatedConfiguration.numberOfThumbnails = 12
         updatedConfiguration.preferredStatusBarStyle = .default
+        
         return updatedConfiguration
     }
     
@@ -387,69 +382,66 @@ class VideoEditorModule: VideoEditor {
         configuration.galleryItemConfiguration.durationLabelBackgroundColor = Self.purple
         configuration.galleryItemConfiguration.activityIndicatorConfiguration.activityLineWidth = 2.0
         configuration.galleryItemConfiguration.cornerRadius = 0.0
-        configuration.closeButtonConfiguration.imageConfiguration = BanubaVideoEditorSDK.ImageConfiguration(imageName: "camera_control.back")
+        configuration.closeButtonConfiguration.imageConfiguration = BanubaVideoEditorSDK.ImageConfiguration(imageName: "camera_control.back",tintColor: Self.purple)
         configuration.albumButtonConfiguration.style.color = #colorLiteral(red: 0.56, green: 0.40, blue: 0.67, alpha: 1)
+
         configuration.nextButtonConfiguration.text = "Next"
         configuration.noItemsLabelConfiguration.alignment = .center
         configuration.layoutConfiguration.numberOfItemsPerRow = 2
         configuration.topBarBlurColor = Self.purple
-        configuration.clearSelectionButtonConfiguration.imageConfiguration = BanubaVideoEditorSDK.ImageConfiguration(imageName: "camera_control.back")
+        configuration.clearSelectionButtonConfiguration.imageConfiguration = BanubaVideoEditorSDK.ImageConfiguration(imageName: "camera_control.back",tintColor: Self.purple)
         configuration.galleryTypeButton.style.color = #colorLiteral(red: 0.56, green: 0.40, blue: 0.67, alpha: 1)
         configuration.galleryTypeUnderlineColor = #colorLiteral(red: 0.56, green: 0.40, blue: 0.67, alpha: 1)
         configuration.backgroundColor = .white
         configuration.nextButtonConfiguration.textConfiguration.color = Self.purple
         configuration.nextButtonConfiguration.backgroundColor = .white
         configuration.bottomViewConfiguration.color = Self.purple
+        configuration.importItemsLabelConfiguration.color = UIColor.white
         configuration.visibleTabsInGallery = [.video, .photo]
         return configuration
     }
     
+    private func updateAlbumsConfiguration(_ configuration: AlbumsConfiguration) -> AlbumsConfiguration {
+        return configuration
+    }
+
+    
     private func updateEditorConfiguration(_ configuration: EditorConfiguration) -> EditorConfiguration {
         var updatedConfiguration = configuration
-        
-        updatedConfiguration.additionalEffectsButtons = [
-            AdditionalEffectsButtonConfiguration(
-                identifier: .sticker,
-                imageConfiguration: ImageConfiguration(imageName: "ic_stickers_off"),
-                selectedImageConfiguration: ImageConfiguration(imageName: "ic_stickers_on")
-            ),
-            AdditionalEffectsButtonConfiguration(
-                identifier: .text,
-                imageConfiguration: ImageConfiguration(imageName: "ic_text_off"),
-                selectedImageConfiguration: ImageConfiguration(imageName: "ic_text_on")
-            ),
-            AdditionalEffectsButtonConfiguration(
-                identifier: .effects,
-                imageConfiguration: ImageConfiguration(imageName: "ic_effects_off"),
-                selectedImageConfiguration: ImageConfiguration(imageName: "ic_effects_on")
-            ),
-            AdditionalEffectsButtonConfiguration(
-                identifier: .masks,
-                imageConfiguration: ImageConfiguration(imageName: "ic_masks_off"),
-                selectedImageConfiguration: ImageConfiguration(imageName: "ic_masks_on")
-            ),
-            AdditionalEffectsButtonConfiguration(
-                identifier: .sound,
-                imageConfiguration: ImageConfiguration(imageName: "ic_audio_off"),
-                selectedImageConfiguration: ImageConfiguration(imageName: "ic_audio_on")
-            ),
-            AdditionalEffectsButtonConfiguration(
-                identifier: .time,
-                imageConfiguration: ImageConfiguration(imageName: "ic_speed_effects_off"),
-                selectedImageConfiguration: ImageConfiguration(imageName: "ic_speed_effects_on")
-            ),
-            AdditionalEffectsButtonConfiguration(
-                identifier: .color,
-                imageConfiguration: ImageConfiguration(imageName: "ic_filters_off"),
-                selectedImageConfiguration: ImageConfiguration(imageName: "ic_filters_on")
-            ),
-            AdditionalEffectsButtonConfiguration(
-                identifier: .blur,
-                imageConfiguration: ImageConfiguration(imageName: "blur_inactive"),
-                selectedImageConfiguration: ImageConfiguration(imageName: "blur_active")
-            )
-        ]
-        
+//        updatedConfiguration.bu
+//        updatedConfiguration.additionalEffectsButtons = [
+//            AdditionalEffectsButtonConfiguration(
+//                identifier: .sticker,
+//                imageConfiguration: ImageConfiguration(imageName: "ic_stickers_off"),
+//                selectedImageConfiguration: ImageConfiguration(imageName: "ic_stickers_on")
+//            ),
+//            AdditionalEffectsButtonConfiguration(
+//                identifier: .text,
+//                imageConfiguration: ImageConfiguration(imageName: "ic_text_off"),
+//                selectedImageConfiguration: ImageConfiguration(imageName: "ic_text_on")
+//            ),
+//            AdditionalEffectsButtonConfiguration(
+//                identifier: .sound,
+//                imageConfiguration: ImageConfiguration(imageName: "ic_audio_off"),
+//                selectedImageConfiguration: ImageConfiguration(imageName: "ic_audio_on")
+//            ),
+//            AdditionalEffectsButtonConfiguration(
+//                identifier: .time,
+//                imageConfiguration: ImageConfiguration(imageName: "ic_speed_effects_off"),
+//                selectedImageConfiguration: ImageConfiguration(imageName: "ic_speed_effects_on")
+//            ),
+//            AdditionalEffectsButtonConfiguration(
+//                identifier: .color,
+//                imageConfiguration: ImageConfiguration(imageName: "ic_filters_off"),
+//                selectedImageConfiguration: ImageConfiguration(imageName: "ic_filters_on")
+//            ),
+//            AdditionalEffectsButtonConfiguration(
+//                identifier: .blur,
+//                imageConfiguration: ImageConfiguration(imageName: "blur_inactive"),
+//                selectedImageConfiguration: ImageConfiguration(imageName: "blur_active")
+//            )
+//        ]
+//
         updatedConfiguration.additionalEffectsButtonsBottomOffset = 0.0
         updatedConfiguration.videoResolution = VideoResolutionConfiguration(
             default: .hd1920x1080,
@@ -459,6 +451,7 @@ class VideoEditorModule: VideoEditor {
                 .iPhone6s: .hd1280x720,
                 .iPhone6Plus: .default854x480,
                 .iPhone6sPlus: .hd1280x720,
+                .iPhoneSE: .hd1280x720,
                 .iPhoneSE: .hd1280x720,
             ],
             thumbnailHeights: [
@@ -476,21 +469,24 @@ class VideoEditorModule: VideoEditor {
         updatedConfiguration.saveButton.background.cornerRadius = 4.0
         updatedConfiguration.saveButton.width = 68.0
         updatedConfiguration.saveButton.height = 42.0
+        updatedConfiguration.saveButton.imageConfiguration = nil
         updatedConfiguration.saveButton.title.style.color = .white
+    
         
-        updatedConfiguration.backButton = BackButtonConfiguration(imageConfiguration: BanubaVideoEditorSDK.ImageConfiguration(imageName: "ic_nav_back_arrow"))
+        updatedConfiguration.backButton = BackButtonConfiguration(imageConfiguration: BanubaVideoEditorSDK.ImageConfiguration(imageName: "ic_back_arrow"),selectedImageConfiguration:BanubaVideoEditorSDK.ImageConfiguration(imageName: "ic_back_arrow",tintColor: Self.purple) )
+        
         
         return updatedConfiguration
     }
     
     private func updateMusicEditorConfigurtion(_ configuration: MusicEditorConfig) -> MusicEditorConfig {
         var updatedConfiguration = configuration
-        
+
         updatedConfiguration.mainMusicViewControllerConfig = updateMainMusicViewConfiguration(configuration.mainMusicViewControllerConfig)
         updatedConfiguration.audioRecorderViewControllerConfig = updateAudioRecorderViewConfiguration(configuration.audioRecorderViewControllerConfig)
         updatedConfiguration.audioTrackLineEditControllerConfig = updateAudioTrackLineEditConfiguration(configuration.audioTrackLineEditControllerConfig)
         updatedConfiguration.videoTrackLineEditControllerConfig = updateVideoTrackLineEditConfiguration(configuration.videoTrackLineEditControllerConfig)
-        
+
         /// Provides voice filters which can be applied for voice recording at music editor screen
         struct ExampleVoiceFilterProvider: VoiceFilterProvider {
             func provideFilters() -> [VoiceFilter] {
@@ -513,88 +509,21 @@ class VideoEditorModule: VideoEditor {
     private func updateMainMusicViewConfiguration(_ configuration: MainMusicViewControllerConfig) -> MainMusicViewControllerConfig {
         var updatedConfiguration = configuration
         
-        updatedConfiguration.editButtons = [
-            EditButtonConfig(
-                font: UIFont.systemFont(ofSize: 14.0),
-                type: .track,
-                title: "Tracks",
-                titleColor: #colorLiteral(red: 0.56, green: 0.40, blue: 0.67, alpha: 1),
-                imageName: "ic_tracks"
-            ),
-            EditButtonConfig(
-                font: UIFont.systemFont(ofSize: 14.0),
-                type: .effect,
-                title: "Effects",
-                titleColor: #colorLiteral(red: 0.56, green: 0.40, blue: 0.67, alpha: 1),
-                imageName: "ic_effects"
-            ),
-            EditButtonConfig(
-                font: UIFont.systemFont(ofSize: 14.0),
-                type: .record,
-                title: "Record",
-                titleColor: #colorLiteral(red: 0.56, green: 0.40, blue: 0.67, alpha: 1),
-                imageName: "ic_voice_recording"
-            ),
-            EditButtonConfig(
-                font: UIFont.systemFont(ofSize: 14.0),
-                type: .volume,
-                title: "Volume",
-                titleColor: #colorLiteral(red: 0.56, green: 0.40, blue: 0.67, alpha: 1),
-                imageName: "ic-volume"
-            )
-        ]
-        
-        updatedConfiguration.editButtonsHeight = 50.0
-        
-        updatedConfiguration.editCompositionButtons = [
-            EditCompositionButtonConfig(
-                font: UIFont.systemFont(ofSize: 14.0),
-                type: .voiceEffect,
-                title: "Voice",
-                titleColor: #colorLiteral(red: 0.56, green: 0.40, blue: 0.67, alpha: 1),
-                imageName: "voice",
-                selectedImageName: nil
-            ),
-            EditCompositionButtonConfig(
-                font: UIFont.systemFont(ofSize: 14.0),
-                type: .edit,
-                title: "Edit",
-                titleColor: #colorLiteral(red: 0.56, green: 0.40, blue: 0.67, alpha: 1),
-                imageName: "ic_edit",
-                selectedImageName: nil
-            ),
-            EditCompositionButtonConfig(
-                font: UIFont.systemFont(ofSize: 14.0),
-                type: .delete,
-                title: "Delete",
-                titleColor: #colorLiteral(red: 0.56, green: 0.40, blue: 0.67, alpha: 1),
-                imageName: "ic_trash",
-                selectedImageName: nil
-            )
-        ]
-        
-        updatedConfiguration.controlButtons = [
-            ControlButtonConfig(
-                type: .reset,
-                imageName: "ic_restart",
-                selectedImageName: nil
-            ),
-            ControlButtonConfig(
-                type: .play,
-                imageName: "ic_editor_play",
-                selectedImageName: "ic_pause"
-            ),
-            ControlButtonConfig(
-                type: .done,
-                imageName: "ic_done",
-                selectedImageName: nil
-            )
-        ]
+       
         
         updatedConfiguration.playerControlsHeight = 50.0
-        updatedConfiguration.audioWaveConfiguration.isRandomWaveColor = true
-        updatedConfiguration.mainLabelColors = #colorLiteral(red: 0.56, green: 0.40, blue: 0.67, alpha: 1)
-        updatedConfiguration.additionalLabelColors = UIColor.black
+//        updatedConfiguration.mainLabelColors = .black
+        updatedConfiguration.additionalLabelColors = .black
+        updatedConfiguration.backgroundConfiguration.color = .white
+
+    
+        updatedConfiguration.audioWaveConfiguration.isRandomWaveColor = false
+        updatedConfiguration.audioWaveConfiguration.backgroundColor = Self.purple
+        updatedConfiguration.audioWaveConfiguration.waveLinesColor = Self.purple
+        updatedConfiguration.audioWaveConfiguration.waveBorderColor = Self.purple
+        updatedConfiguration.videoControlsViewBackgroundConfiguration.color = .white
+        updatedConfiguration.audioWaveConfiguration.backgroundColor = .white
+//        updatedConfiguration.additionalLabelColors = Self.purple
         updatedConfiguration.tracksLimit = 5
         updatedConfiguration.cursorColor = #colorLiteral(red: 0.56, green: 0.40, blue: 0.67, alpha: 1)
         updatedConfiguration.controlsBackgroundConfiguration.cornerRadius = 0.0
@@ -607,28 +536,12 @@ class VideoEditorModule: VideoEditor {
     private func updateAudioRecorderViewConfiguration(_ configuration: AudioRecorderViewControllerConfig) -> AudioRecorderViewControllerConfig {
         var updatedConfiguration = configuration
         
-        updatedConfiguration.rewindToStartButton = ControlButtonConfig(
-            type: .reset,
-            imageName: "ic_restart",
-            selectedImageName: nil
-        )
         
-        updatedConfiguration.playPauseButton = ControlButtonConfig(
-            type: .play,
-            imageName: "ic_editor_play",
-            selectedImageName: "ic_pause"
-        )
         
-        updatedConfiguration.playerControlsHeight = 50.0
         
-        updatedConfiguration.recordButton = ControlButtonConfig(
-            type: .play,
-            imageName: "ic_start_recording",
-            selectedImageName: "ic_pause_recording"
-        )
         
-        updatedConfiguration.backButtonImage = "ic_close"
-        updatedConfiguration.doneButtonImage = "ic_done"
+        
+        updatedConfiguration.backgroundConfiguration.color = .white
         updatedConfiguration.dimViewColor = #colorLiteral(red: 0.3176470588, green: 0.5960784314, blue: 0.8549019608, alpha: 0.2039811644)
         updatedConfiguration.additionalLabelColors = #colorLiteral(red: 0.56, green: 0.40, blue: 0.67, alpha: 1)
         updatedConfiguration.startingRecordingTimerSeconds = 0.0
@@ -637,19 +550,16 @@ class VideoEditorModule: VideoEditor {
         updatedConfiguration.backgroundConfiguration.cornerRadius = 0.0
         updatedConfiguration.playerControlsBackgroundConfiguration.cornerRadius = 0.0
         updatedConfiguration.timelineCornerRadius = 0.0
-        
+        updatedConfiguration.additionalLabelColors = .black
+        updatedConfiguration.resetButton.backgroundColor = Self.purple
+        updatedConfiguration.resetButton.textConfiguration?.color = .white
         return updatedConfiguration
     }
     
     private func updateVideoTrackLineEditConfiguration(_ configuration: VideoTrackLineEditViewControllerConfig) -> VideoTrackLineEditViewControllerConfig {
         var updatedConfiguration = configuration
         
-        updatedConfiguration.doneButton = ImageButtonConfiguration(
-            imageConfiguration: .init(
-                imageName: "ic_done",
-                tintColor: #colorLiteral(red: 0.56, green: 0.40, blue: 0.67, alpha: 1)
-            )
-        )
+       
         updatedConfiguration.sliderTintColor = #colorLiteral(red: 0.56, green: 0.40, blue: 0.67, alpha: 1)
         updatedConfiguration.mainLabelColors = #colorLiteral(red: 0.56, green: 0.40, blue: 0.67, alpha: 1)
         updatedConfiguration.additionalLabelColors = #colorLiteral(red: 0.56, green: 0.40, blue: 0.67, alpha: 1)
@@ -660,21 +570,22 @@ class VideoEditorModule: VideoEditor {
     
     private func updateAudioTrackLineEditConfiguration(_ configuration: AudioTrackLineEditViewControllerConfig) -> AudioTrackLineEditViewControllerConfig {
         var updatedConfiguration = configuration
-        
-        updatedConfiguration.audioWaveConfiguration.isRandomWaveColor = true
-        updatedConfiguration.audioWaveConfiguration.waveLinesColor = #colorLiteral(red: 0.56, green: 0.40, blue: 0.67, alpha: 1)
-        updatedConfiguration.doneButtonImageName = "ic_done"
+        updatedConfiguration.backgroundConfiguration.color = .white
+//        updatedConfiguration.doneButtonImageName = "ic_done"
         updatedConfiguration.doneButtonTintColor = #colorLiteral(red: 0.56, green: 0.40, blue: 0.67, alpha: 1)
         updatedConfiguration.sliderTintColor = #colorLiteral(red: 0.56, green: 0.40, blue: 0.67, alpha: 1)
         updatedConfiguration.draggersColor = #colorLiteral(red: 0.56, green: 0.40, blue: 0.67, alpha: 1)
-        updatedConfiguration.draggerImageName = "trim_left"
+//        updatedConfiguration.draggerImageName = "trim_left"
         updatedConfiguration.trimHeight = 61.0
         updatedConfiguration.trimBorderColor = #colorLiteral(red: 0.56, green: 0.40, blue: 0.67, alpha: 1)
         updatedConfiguration.trimBorderWidth = 2.0
         updatedConfiguration.cursorHeight = 1.0
         updatedConfiguration.dimViewColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        updatedConfiguration.mainLabelColors = #colorLiteral(red: 0.56, green: 0.40, blue: 0.67, alpha: 1)
-        updatedConfiguration.additionalLabelColors = #colorLiteral(red: 0.56, green: 0.40, blue: 0.67, alpha: 1)
+        updatedConfiguration.mainLabelColors = Self.purple
+        updatedConfiguration.additionalLabelColors = .black
+        updatedConfiguration.audioWaveConfiguration.waveLinesColor = .white
+        updatedConfiguration.audioWaveConfiguration.backgroundColor = Self.purple
+        updatedConfiguration.audioWaveConfiguration.isRandomWaveColor = false
         updatedConfiguration.cursorColor = #colorLiteral(red: 0.56, green: 0.40, blue: 0.67, alpha: 1)
         updatedConfiguration.draggersWidth = 25.0
         updatedConfiguration.draggersLineColor = #colorLiteral(red: 0.56, green: 0.40, blue: 0.67, alpha: 1)
@@ -692,6 +603,7 @@ class VideoEditorModule: VideoEditor {
     
     private func updateAlertViewConfiguration(_ configuration: AlertViewConfiguration) -> AlertViewConfiguration {
         var updatedConfiguration = configuration
+
         updatedConfiguration.cornerRadius = 7.0
         updatedConfiguration.agreeButtonRadius = 4.0
         updatedConfiguration.refuseButtonRadius = 4.0
@@ -709,7 +621,7 @@ class VideoEditorModule: VideoEditor {
             ),
             text: nil
         )
-        updatedConfiguration.refuseButtonBackgroundColor = .red
+        updatedConfiguration.refuseButtonBackgroundColor = UIColor(red: 0.84, green: 0.00, blue: 0.25, alpha: 1.00)
         updatedConfiguration.agreeButtonBackgroundColor = Self.purple
         updatedConfiguration.titleTextConfig = TextConfiguration(
             kern: .zero,
@@ -749,14 +661,7 @@ class VideoEditorModule: VideoEditor {
     
     
     
-    func updateAspectsConfiguration(_ configuration: EffectsListConfiguration) -> EffectsListConfiguration {
-        var updatedConfiguration = configuration
-        updatedConfiguration.backgroundControlsViewColor = UIColor.white
-        updatedConfiguration.doneButton = ImageButtonConfiguration(imageConfiguration: ImageConfiguration(imageName: "ic_done"))
-        updatedConfiguration.cancelButton = ImageButtonConfiguration(imageConfiguration: ImageConfiguration(imageName: "ic_close"))
-        
-        return updatedConfiguration
-    }
+  
     
     private func updateHandsfreeConfiguration(_ configuration: HandsfreeConfiguration?) -> HandsfreeConfiguration? {
         guard var config = configuration else { return nil }
