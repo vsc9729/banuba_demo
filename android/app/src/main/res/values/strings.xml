@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Banuba VE SDK Integration sample</string>
+
+    <!-- AUDIO BROWSER MUBERT -->
+    <string name="mubert_api_key">PUT YOUR PERSONAL MUBERT KEY</string>
+    <string name="remove_track">Cancel</string>
+    <string name="apply_track">Select</string>
+
+    <string name="alert_delete_video_message"> Do you want to delete the video?</string>
+
+
+</resources>
