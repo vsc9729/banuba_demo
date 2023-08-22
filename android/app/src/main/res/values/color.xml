@@ -1,20 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Video editor sample colors (you can use your app brand colors) -->
-    <color name="egg_blue">#06BCC1</color>
-    <color name="egg_blue_transparent">#6606BCC1</color>
+    <color name="egg_blue">#8F65AB</color>
+    <color name="egg_blue_transparent">#8F65AB</color>
     <color name="big_stone">#12263A</color>
     <color name="big_stone_a90">#E612263A</color>
     <color name="violet_red">#FA3E76</color>
     <color name="violet_red_20">#33FA3E76</color>
     <color name="catskill_white">#E3E9F1</color>
+    <color name="rec_btn_idle_state_color">#8F65AB</color>
+    <color name="alert_camera_delete_video">#8F65AB</color>
+    <color name="cancel_red">#D70040</color>
+
+   
+
+    
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="light_grey">#898989</color>
+
+    
 
     <array name="progress_gradient_colors">
         <item>@color/egg_blue</item>
         <item>@color/white</item>
         <item>@color/egg_blue</item>
     </array>
+  
 </resources>
